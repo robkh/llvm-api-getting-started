@@ -1,5 +1,6 @@
 #include "llvm/IR/Module.h"
 #include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/IRBuilder.h"
 using namespace llvm;
 
 int main(int argc, char**argv) {
@@ -19,6 +20,10 @@ int main(int argc, char**argv) {
 
   // Create BB
   BasicBlock* block = BasicBlock::Create(Ctx, "entry", Sum);
+  IRBuilder<> builder(block);
+
+  Value* tmp = builder.CreateAdd(Sum->getOperand(0), Sum->getOperand(1), "tmp");
+  builder.CreateRet(tmp);
 
   delete Mod;
   return 0;
