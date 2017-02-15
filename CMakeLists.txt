@@ -16,6 +16,7 @@ add_definitions(${LLVM_DEFINITIONS})
 
 # Now build our tools
 add_executable(sum-llvm-ir sum.cpp)
+target_compile_features(sum-llvm-ir PRIVATE cxx_range_for)
 
 # Find the libraries that correspond to the LLVM components
 # that we wish to use
